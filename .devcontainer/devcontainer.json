@@ -1,0 +1,20 @@
+# Use Alpine Linux as base image
+FROM golang:alpine
+
+# Install Git
+RUN apk update && apk add --no-cache git
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the local code to the container
+COPY . .
+
+# Build the Go application
+RUN go build -o myapp
+
+# Expose the port the application runs on
+EXPOSE 8080
+
+# Command to run the executable
+CMD ["./myapp"]
